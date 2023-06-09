@@ -38,6 +38,15 @@ services:
       - server-network
     volumes:
       - ./database/postgresql:/var/lib/postgresql/data
+
+  cache:
+    image: 'redis:7.0'
+    networks:
+      - server-network
+    ports:
+      - "6379:6379" # used with RedisInsight and remove in production
+    volumes:
+      - ./sessionCache/redis_data:/data
 networks:
   server-network:
     driver: bridge
